@@ -1,31 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // PRODUCT SLICE
-const initialProductState = {
-  products: [
+const initialCartState = {
+  cartItems: [
     {
       title: "Test",
       price: 6,
       description: "This is a first product - amazing!",
-    },
-    {
-      title: "Cat",
-      price: 22,
-      description: "Buy this cat",
+      amount: 3,
     },
   ],
+  totalAmount: 18,
 };
 
 // reducers
-const productSlice = createSlice({
-  name: "products",
-  initialState: initialProductState,
+const cartSlice = createSlice({
+  name: "cartItems",
+  initialState: initialCartState,
   reducers: {
     addProduct(state, action) {
       state.products = state.products.push(action.payload);
     },
   },
 });
-export const productActions = productSlice.actions;
+export const productActions = cartSlice.actions;
 
-export default productSlice.reducer;
+export default cartSlice.reducer;

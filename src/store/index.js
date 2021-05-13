@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-import productsStoreReducer from "./auth";
+import productsStoreReducer from "./products";
 
 const store = configureStore({
   // config map of reducers
