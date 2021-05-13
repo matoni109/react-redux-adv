@@ -1,6 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 import productsStoreReducer from "./products";
+import cartItemsReducer from "./cart";
 
 const store = configureStore({
   // config map of reducers
@@ -8,6 +9,7 @@ const store = configureStore({
   // reducer: { counter: counterSlice.reducer },
   reducer: {
     products: productsStoreReducer,
+    cartItems: cartItemsReducer,
   },
 });
 

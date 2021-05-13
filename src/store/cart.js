@@ -5,9 +5,9 @@ const initialCartState = {
   cartItems: [
     {
       title: "Test",
-      price: 6,
-      description: "This is a first product - amazing!",
-      amount: 3,
+      price: 7,
+      total: 18,
+      quantity: 3,
     },
   ],
   totalAmount: 18,
@@ -18,11 +18,15 @@ const cartSlice = createSlice({
   name: "cartItems",
   initialState: initialCartState,
   reducers: {
+    // one to add
     addProduct(state, action) {
-      state.products = state.products.push(action.payload);
+      state.cartItems = state.cartItems.push(action.payload);
     },
+    // one to take away
+
+    // one to total shit up
   },
 });
-export const productActions = cartSlice.actions;
+export const cartActions = cartSlice.actions;
 
 export default cartSlice.reducer;
