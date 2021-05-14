@@ -3,10 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 
+import { cartActions } from "../../store/cart";
+
 const Cart = (props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems.cartItems);
-  console.log(cartItems);
+
+  const addProductToCartHandler = (product) => {
+    // console.log(product);
+    dispatch(cartActions.addProduct(product));
+  };
+  // console.log(cartItems);
   return (
     <Card className={classes.cart}>
       <h2>Your Shopping Cart</h2>
@@ -17,6 +24,7 @@ const Cart = (props) => {
               key={index.toString()}
               item={{
                 title: product.title,
+                addProduct: addProductToCartHandler.bind(null, product),
                 quantity: product.quantity,
                 total: product.total,
                 price: product.price,

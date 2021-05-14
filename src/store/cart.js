@@ -13,7 +13,7 @@ const initialCartState = {
   totalAmount: 18,
 };
 
-// reducers
+// reducers  paul@bjselec.com.auss
 const cartSlice = createSlice({
   name: "cart",
   initialState: initialCartState,
@@ -21,20 +21,39 @@ const cartSlice = createSlice({
     // one to add from ID
     addProduct(state, action) {
       const newItem = action.payload;
+      // console.log(action.payload);
       const existingItem = state.cartItems.find(
         (item) => item.title === newItem.title
       );
-      if (existingItem) {
-        state.cartItems = state.cartItems.push(newItem);
-        console.log("existing", current(state.cartItems));
+      if (!existingItem) {
+        // don't use ==
+        state.cartItems.push({
+          title: newItem.title,
+          price: newItem.price,
+          quantity: 1,
+          total: newItem.price,
+        });
+        // console.log("updated new listing", current(state));
+      } else {
+        // find_index
+        const itemIndex = state.cartItems.findIndex(
+          (item) => item.title === newItem.title
+        );
+        // console.log(itemIndex);
+        // select item
+        const selectedItem = state.cartItems[itemIndex];
+        //
+        const newQty = selectedItem.quantity + 1;
+        const newTotal = selectedItem.total + selectedItem.price;
+
+        state.cartItems[itemIndex] = {
+          ...newItem, // keeps other items in the object
+          quantity: newQty,
+          total: newTotal,
+        };
+
+        // console.log("updated existing", current(state));
       }
-      // console.log(action.payload);
-
-      // state.cartItems = state.cartItems.push(action.payload);
-
-      // const existingCartItemsIndex = state.cartItems.findIndex(
-      //   (item) => item.id === action.item.id
-      // );
     },
     // one to take away from ID
 
