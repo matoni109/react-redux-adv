@@ -2,14 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 // PRODUCT SLICE
 const initialCartState = {
-  cartItems: [
-    {
-      title: "Test",
-      price: 6,
-      total: 18,
-      quantity: 3,
-    },
-  ],
+  cartItems: [],
   totalAmount: 18,
 };
 
