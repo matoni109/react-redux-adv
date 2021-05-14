@@ -56,9 +56,39 @@ const cartSlice = createSlice({
       }
     },
     // one to take away from ID
+    removeProduct(state, action) {
+      const newItem = action.payload;
+      // console.log(action.payload);
+      const existingItem = state.cartItems.find(
+        (item) => item.title === newItem.title
+      );
+      if (existingItem) {
+        // find_index
+        const itemIndex = state.cartItems.findIndex(
+          (item) => item.title === newItem.title
+        );
+        // console.log(itemIndex);
+        // select item
+        const selectedItem = state.cartItems[itemIndex];
+        //
+        const newQty = selectedItem.quantity - 1;
+        const newTotal = selectedItem.total - selectedItem.price;
 
-    // one to total shit up
+        if (newQty > 0) {
+          state.cartItems[itemIndex] = {
+            ...newItem, // keeps other items in the object
+            quantity: newQty,
+            total: newTotal,
+          };
+        } else {
+          state.cartItems.splice([itemIndex], 1);
+        }
+        // console.log("updated existing", current(state));
+      }
+      // console.log("updated existing", current(state));
+    },
   },
+  // one to total shit up
 });
 export const cartActions = cartSlice.actions;
 
