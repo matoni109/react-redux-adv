@@ -14,19 +14,20 @@ const cartSlice = createSlice({
     // one to add from ID
     addProduct(state, action) {
       const newItem = action.payload;
-      // console.log(action.payload);
+      console.log(action.payload);
       const existingItem = state.cartItems.find(
         (item) => item.title === newItem.title
       );
       if (!existingItem) {
         // don't use ==
         state.cartItems.push({
+          id: newItem.id,
           title: newItem.title,
           price: newItem.price,
           quantity: 1,
           total: newItem.price,
         });
-        // console.log("updated new listing", current(state));
+        console.log("updated new listing", current(state));
       } else {
         // find_index
         const itemIndex = state.cartItems.findIndex(

@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialProductState = {
   products: [
     {
+      id: 1,
       title: "Dog",
       price: 6,
       description: "Buy your best friend today!!",
     },
     {
+      id: 2,
       title: "Cat",
       price: 22,
       description: "Buy this cat.. meow..",
