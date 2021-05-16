@@ -2,6 +2,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 import productsStoreReducer from "./products";
 import cartItemsReducer from "./cart";
+import uiReducer from "./ui-slice";
 
 const store = configureStore({
   // config map of reducers
@@ -10,6 +11,7 @@ const store = configureStore({
   reducer: {
     products: productsStoreReducer,
     cartItems: cartItemsReducer,
+    ui: uiReducer.reducer,
   },
 });
 
