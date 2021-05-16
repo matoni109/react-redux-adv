@@ -11,10 +11,13 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: initialCartState,
   reducers: {
+    replaceCart(state, action) {
+      state.cartItems = action.payload;
+    },
     // one to add from ID
     addProduct(state, action) {
       const newItem = action.payload;
-      console.log(action.payload);
+
       const existingItem = state.cartItems.find(
         (item) => item.title === newItem.title
       );
@@ -84,57 +87,6 @@ const cartSlice = createSlice({
   },
   // one to total shit up
 });
-
-// make THUNK outside of the SLICE
-
-export const sendCartData = (cartItems) => {
-  return async (dispatch) => {
-    // reducer called here
-    dispatch(
-      uiActions.showNoticication({
-        status: "pending",
-        title: "Sending",
-        message: "Sending Cart info",
-      })
-    );
-    /// send the http request
-    const sendRequest = async () => {
-      const response = await fetch(
-        "https://react-db-api-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json",
-        {
-          method: "PUT",
-          dataType: "json",
-          body: JSON.stringify(cartItems),
-        }
-        // PUT overides existing data
-      );
-
-      if (!response.ok) {
-        throw new Error("Sending cart data failed..");
-      }
-    };
-
-    // handle the promise return
-    try {
-      await sendRequest();
-      dispatch(
-        uiActions.showNoticication({
-          status: "success",
-          title: "Success!",
-          message: "Sent Cart info - OK ",
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showNoticication({
-          status: "error",
-          title: "Error!",
-          message: "Sending Cart Data Failed erno ",
-        })
-      );
-    }
-  };
-};
 
 export const cartActions = cartSlice.actions;
 

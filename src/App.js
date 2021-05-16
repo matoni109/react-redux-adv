@@ -5,7 +5,7 @@ import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
 import { uiActions } from "./store/ui-slice";
-import { sendCartData } from "./store/cart";
+import { sendCartData, fetchCartData } from "./store/cart-actions";
 
 let isInitial = true;
 
@@ -17,8 +17,11 @@ function App() {
   //   "updated existing",
   //   current((state) => state.ui.notification)
   // );
-
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
   // if cart changes below fires
+
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
